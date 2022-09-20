@@ -12,7 +12,7 @@ namespace CleanArchProducts.Infra.Data.Repositories
         private ApplicationDbContext _categoryContext;
         public CategoryRepository(ApplicationDbContext context)
         {
-            context = _categoryContext;
+            _categoryContext = context;
         }
         public async Task<Category> CreateAsync(Category category)
         {
