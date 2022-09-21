@@ -1,9 +1,11 @@
+using System;
 using CleanArchProducts.Application.Interfaces;
 using CleanArchProducts.Application.Mappings;
 using CleanArchProducts.Application.Services;
 using CleanArchProducts.Domain.Interfaces;
 using CleanArchProducts.Infra.Data.Context;
 using CleanArchProducts.Infra.Data.Repositories;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,6 +24,9 @@ namespace CleanArchProducts.Infra.IoC
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddAutoMapper(typeof(DomainToDTOMappingProfile));
+
+            var myHandlers = AppDomain.CurrentDomain.Load("CleanArchProducts.Application");
+            services.AddMediatR(myHandlers);
             return services;
         }
     }
